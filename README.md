@@ -27,7 +27,7 @@ $ curl -X POST http://127.0.0.1:8000/api/login_check -d _username=bill -d _passw
 Access a secured route:
 ```
 $ curl -H "Authorization: Bearer [TOKEN]" http://127.0.0.1:8000/api
--> Logged in as johndoe
+-> Logged in as bill
 ```
 
 
