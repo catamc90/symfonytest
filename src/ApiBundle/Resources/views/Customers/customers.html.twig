@@ -1,0 +1,26 @@
+{% extends '@Api/base.html.twig' %}
+
+
+{% block body %}
+    <div class="container">
+        <h1>Add Customers</h1>
+        {#{% form_theme form 'bootstrap_3_layout.html.twig' %}#}
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+
+
+        {% block flash_messages %}
+            {% for type, messages in app.session.flashbag.all() %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ type }} alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        {{ message | raw }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        {% endblock %}
+
+    </div>
+
+{% endblock %}
