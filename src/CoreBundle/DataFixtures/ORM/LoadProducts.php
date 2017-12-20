@@ -26,8 +26,6 @@ class LoadProducts extends Fixture
             $products->setCreatedAt($faker->dateTime);
             $products->setUpdatedAt($faker->dateTime);
             $products->setDeletedAt($faker->dateTime);
-//            $products->setCustomer();
-
             $products->setCustomer($customers->getId());
 
             $manager->persist($products);

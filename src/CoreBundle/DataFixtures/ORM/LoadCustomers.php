@@ -24,7 +24,6 @@ class LoadCustomers extends Fixture
             $customers->setCreatedAt($faker->dateTime);
             $customers->setUpdatedAt($faker->dateTime);
             $customers->setDeletedAt($faker->dateTime);
-//            $customers->setProducts(mt_rand(1,15));
             $manager->persist($customers);
         }
 
