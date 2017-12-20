@@ -45,13 +45,13 @@ class ApiProductsController extends FOSRestController implements ClassResourceIn
     public function getAction($id)
     {
 
-        $products = $this->getDoctrine()->getRepository('ApiBundle:Products')->findOneBy(array('id' => $id));
+        $product = $this->getDoctrine()->getRepository('ApiBundle:Products')->find($id);
 
-        if ($products === null) {
+        if ($product === null) {
             return new View(null, Response::HTTP_NOT_FOUND);
         }
 
-        return $products;
+        return $product;
     }
 
 
@@ -101,16 +101,16 @@ class ApiProductsController extends FOSRestController implements ClassResourceIn
         }
 
         /**
-         * var  $products Products
+         * var  $product Products
          */
-        $products = $form->getData();
+        $product = $form->getData();
 
         $em = $this->getDoctrine()->getManager();
-        $em->persist($products);
+        $em->persist($product);
         $em->flush();
 
         $routeOptions = [
-            'id' => $products->getId(),
+            'id' => $product->getId(),
             '_format' => $request->get('_format'),
         ];
 
@@ -136,13 +136,13 @@ class ApiProductsController extends FOSRestController implements ClassResourceIn
     {
 
         /**
-         * @var $products Products
+         * @var $product Products
          */
-        $products = $this->getDoctrine()->getRepository('ApiBundle:Products')->find($id);
-        if ($products === null) {
+        $product = $this->getDoctrine()->getRepository('ApiBundle:Products')->find($id);
+        if ($product === null) {
             return new View(null, Response::HTTP_NOT_FOUND);
         }
-        $form = $this->createForm(ProductsType::class, $products, [
+        $form = $this->createForm(ProductsType::class, $product, [
             'csrf_protection' => false,
         ]);
         $form->submit($request->request->all());
@@ -154,12 +154,11 @@ class ApiProductsController extends FOSRestController implements ClassResourceIn
         $em->persist($task);
         $em->flush();
         $routeOptions = [
-            'id' => $products->getId(),
+            'id' => $product->getId(),
             '_format' => $request->get('_format'),
         ];
 
-        return "modify with Success!";
-//        return $this->routeRedirectView('get_products', $routeOptions, Response::HTTP_NO_CONTENT);
+        return $this->routeRedirectView('get_products', $routeOptions, Response::HTTP_CREATED);
     }
 
     /**
@@ -176,22 +175,21 @@ class ApiProductsController extends FOSRestController implements ClassResourceIn
     public function deleteAction($id)
     {
         /**
-         * @var $products Products
+         * @var $product Products
          */
-        $products = $this->getDoctrine()->getRepository('ApiBundle:Products')->find($id);
+        $product = $this->getDoctrine()->getRepository('ApiBundle:Products')->find($id);
 
-        if ($products === null) {
+        if ($product === null) {
             return new View(null, Response::HTTP_NOT_FOUND);
         }
 
         $em = $this->getDoctrine()->getManager();
-//        $em->remove($products);
-        $products->setStatus("deleted");
-        $products->setDeletedAt(new \DateTime());
-        $em->persist($products);
+        $product->setStatus("deleted");
+        $product->setDeletedAt(new \DateTime());
+        $em->persist($product);
         $em->flush();
 
-        return new View(null, Response::HTTP_NO_CONTENT);
+        return new View(null, Response::HTTP_CREATED);
     }
 
 

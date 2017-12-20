@@ -11,6 +11,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use ApiBundle\Entity\User;
 
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+
+/**
+ * Class TokenController
+ * @package ApiBundle\Controller
+ */
+
 class TokenController extends Controller
 {
 

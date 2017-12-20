@@ -1,24 +1,12 @@
-#api:
-#    resource: "@ApiBundle/Controller/"
-#    type:     annotation
-#    prefix:   /
 
-api:
-    resource: "@ApiBundle/Controller/"
-    type:     rest
-    prefix:   /
+api_bundle:
+  resource: "@ApiBundle/Resources/config/routing.yml"
+  prefix:   /
 
 core:
     resource: "@CoreBundle/Controller/"
     type:     annotation
     prefix:   /
-
-# app/config/routing.yml
-#app.swagger:
-#    path: /api/doc.json
-#    methods: GET
-#    defaults: { _controller: nelmio_api_doc.controller.swagger }
-
 
 NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"

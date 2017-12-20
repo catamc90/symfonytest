@@ -1,0 +1,15 @@
+ApiProducts:
+    resource: "@ApiBundle/Controller/ApiProductsController.php"
+    type:     rest
+
+ApiCustomers:
+    resource: "@ApiBundle/Controller/ApiCustomersController.php"
+    type:     rest
+
+register:
+    resource: "@ApiBundle/Controller/TokenController.php"
+    type:     annotation
+
+api:
+    resource: "@ApiBundle/Controller/TokenController.php"
+    type:     annotation

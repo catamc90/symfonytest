@@ -27,6 +27,7 @@ use Symfony\Component\HttpFoundation\Response;
 class ApiCustomersController extends FOSRestController implements ClassResourceInterface
 {
 
+
     /**
      * Gets an individual Customers
      *
@@ -41,18 +42,19 @@ class ApiCustomersController extends FOSRestController implements ClassResourceI
      *         200 = "Returned when successful",
      *         404 = "Return when not found"
      *     }
+     *
      * )
      */
     public function getAction($id)
     {
 
-        $customers = $this->getDoctrine()->getRepository('ApiBundle:Customers')->findOneBy(array('id' => $id));
+        $customer = $this->getDoctrine()->getRepository('ApiBundle:Customers')->find($id);
 
-        if ($customers === null) {
+        if ($customer === null) {
             return new View(null, Response::HTTP_NOT_FOUND);
         }
 
-        return $customers;
+        return $customer;
     }
 
 
@@ -159,8 +161,8 @@ class ApiCustomersController extends FOSRestController implements ClassResourceI
             '_format' => $request->get('_format'),
         ];
 
-        return "modify with Success!";
-//        return $this->routeRedirectView('get_products', $routeOptions, Response::HTTP_NO_CONTENT);
+        return $this->routeRedirectView('get_products', $routeOptions, Response::HTTP_CREATED);
+
     }
 
 
@@ -178,22 +180,21 @@ class ApiCustomersController extends FOSRestController implements ClassResourceI
     public function deleteAction($id)
     {
         /**
-         * @var $customers Customers
+         * @var $customer Customers
          */
-        $customers = $this->getDoctrine()->getRepository('ApiBundle:Customers')->find($id);
+        $customer = $this->getDoctrine()->getRepository('ApiBundle:Customers')->find($id);
 
-        if ($customers === null) {
+        if ($customer === null) {
             return new View(null, Response::HTTP_NOT_FOUND);
         }
 
         $em = $this->getDoctrine()->getManager();
-//        $em->remove($customers);
-        $customers->setStatus("deleted");
-        $customers->setDeletedAt(new \DateTime());
-        $em->persist($customers);
+        $customer->setStatus("deleted");
+        $customer->setDeletedAt(new \DateTime());
+        $em->persist($customer);
         $em->flush();
 
-        return new View(null, Response::HTTP_NO_CONTENT);
+        return new View(null, Response::HTTP_CREATED);
     }
 
 
