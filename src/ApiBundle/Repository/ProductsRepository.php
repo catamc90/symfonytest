@@ -10,4 +10,14 @@ namespace ApiBundle\Repository;
  */
 class ProductsRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findPendingProducts()
+    {
+        $queryBuilder = $this->createQueryBuilder('products')
+                        ->where('products.status  = :status')
+                        ->setParameter('status', "pending")
+                        ->getQuery()
+                        ->execute();
+
+        return $queryBuilder;
+    }
 }
