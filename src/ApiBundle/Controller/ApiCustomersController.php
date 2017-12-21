@@ -116,7 +116,7 @@ class ApiCustomersController extends FOSRestController implements ClassResourceI
             '_format' => $request->get('_format'),
         ];
 
-        return $this->routeRedirectView('cget_products', $routeOptions, Response::HTTP_CREATED);
+        return $this->routeRedirectView('cget_customers', $routeOptions, Response::HTTP_CREATED);
     }
 
 
@@ -161,7 +161,7 @@ class ApiCustomersController extends FOSRestController implements ClassResourceI
             '_format' => $request->get('_format'),
         ];
 
-        return $this->routeRedirectView('get_products', $routeOptions, Response::HTTP_CREATED);
+        return $this->routeRedirectView('get_customers', $routeOptions, Response::HTTP_CREATED);
 
     }
 
